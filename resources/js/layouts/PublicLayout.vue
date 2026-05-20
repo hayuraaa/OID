@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const page = usePage();
+const mobileOpen = ref(false);
 
 const navItems = [
     { label: 'Beranda', href: '/' },
@@ -47,13 +48,56 @@ function isActive(href: string) {
                     </Link>
                 </nav>
                 <!-- Mobile menu button -->
-                <button class="md:hidden p-2" aria-label="Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button class="md:hidden p-2" aria-label="Menu" @click="mobileOpen = !mobileOpen">
+                    <svg v-if="!mobileOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
+
         </header>
+
+        <!-- Mobile overlay -->
+        <transition name="fade">
+            <div
+                v-if="mobileOpen"
+                class="fixed inset-0 z-40 bg-black/30 md:hidden"
+                @click="mobileOpen = false"
+            />
+        </transition>
+
+        <!-- Mobile drawer (right side) -->
+        <transition name="slide-right">
+            <div
+                v-if="mobileOpen"
+                class="fixed top-0 right-0 z-50 h-full w-64 bg-white shadow-xl md:hidden flex flex-col"
+            >
+                <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+                    <img src="/logo-oi/Icon-logo.png" alt="Open Indonesia" class="h-8 w-auto" />
+                    <button @click="mobileOpen = false" aria-label="Tutup menu">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <nav class="flex flex-col px-6 py-4 gap-1">
+                    <Link
+                        v-for="item in navItems"
+                        :key="item.href"
+                        :href="item.href"
+                        class="py-3 px-3 rounded-md text-sm font-medium transition-colors"
+                        :style="isActive(item.href) ? 'color: #1E6C93;' : ''"
+                        :class="isActive(item.href) ? 'font-semibold bg-blue-50' : 'text-black hover:bg-gray-50'"
+                        @click="mobileOpen = false"
+                    >
+                        {{ item.label }}
+                    </Link>
+                </nav>
+            </div>
+        </transition>
 
         <!-- Page content -->
         <main class="flex-1">
@@ -108,3 +152,11 @@ function isActive(href: string) {
 
     </div>
 </template>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active { transition: opacity 0.2s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
+
+.slide-right-enter-active, .slide-right-leave-active { transition: transform 0.25s ease; }
+.slide-right-enter-from, .slide-right-leave-to { transform: translateX(100%); }
+</style>
