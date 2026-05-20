@@ -100,7 +100,7 @@ function isActive(href: string) {
                 </div>
                 <div class="mt-8 pt-6 border-t border-blue-400">
                     <p class="text-xs text-blue-200 text-center">
-                        © 2025 Open Indonesia. Semua hak cipta dilindungi undang-undang.
+                        © 2026 Open Indonesia. Semua konten situs ini dirilis di bawah Lisensi Creative Commons Attribution-ShareAlike kecuali dinyatakan lain.
                     </p>
                 </div>
             </div>
