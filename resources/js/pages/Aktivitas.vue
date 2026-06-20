@@ -4,12 +4,22 @@ import PublicLayout from '@/layouts/PublicLayout.vue';
 
 const activities = [
     {
+        type: 'kegiatan',
+        title: 'Konferensi Open Indonesia',
+        description: 'Open Indonesia pertama kali berkumpul pada tahun 2025 sebagai sebuah inisiatif bersama untuk membangun ekosistem gerakan terbuka yang lebih baik dan maju di Indonesia. Pertemuan tersebut mempertemukan berbagai komunitas, organisasi, akademisi, dan masyarakat sipil yang memiliki kepedulian terhadap keterbukaan pengetahuan, data, budaya, dan teknologi.',
+        thumbnail: '/img/aktivitas/Konferensi%20Open%20Indonesia1.png',
+        link: '/aktivitas/konferensi-open-indonesia-2026',
+        label: 'Lihat Kegiatan',
+        external: false,
+    },
+    {
         type: 'article',
         title: 'Kick-off Koalisi Open Indonesia',
         description: 'Acara kick-off Koalisi Open Indonesia resmi diselenggarakan pada hari Sabtu, 31 Januari 2026 di Yogyakarta. Pertemuan ini dihadiri oleh perwakilan dari sedikitnya delapan organisasi dan komunitas pegiat Gerakan Terbuka (Open Movement) di Indonesia.',
         thumbnail: '/Banner-GerakanOpenIndonesia.png',
         link: 'https://theconversation.com/koalisi-open-indonesia-upaya-kolaboratif-membuka-akses-pengetahuan-untuk-semua-276064',
         label: 'Baca Selengkapnya',
+        external: true,
     },
     {
         type: 'video',
@@ -18,6 +28,7 @@ const activities = [
         thumbnail: 'https://img.youtube.com/vi/NTFo4-kOyLs/hqdefault.jpg',
         link: 'https://www.youtube.com/watch?v=NTFo4-kOyLs',
         label: 'Tonton Video',
+        external: true,
     },
 ];
 </script>
@@ -37,8 +48,8 @@ const activities = [
                     v-for="item in activities"
                     :key="item.title"
                     :href="item.link"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    :target="item.external ? '_blank' : '_self'"
+                    :rel="item.external ? 'noopener noreferrer' : undefined"
                     class="group flex flex-col border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
                 >
                     <!-- Thumbnail -->
@@ -56,13 +67,11 @@ const activities = [
                                 </svg>
                             </div>
                         </div>
-                        <!-- Article badge -->
-                        <div v-if="item.type === 'article'" class="absolute top-3 left-3">
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/90 text-gray-700">Artikel</span>
-                        </div>
-                        <!-- Video badge -->
-                        <div v-if="item.type === 'video'" class="absolute top-3 left-3">
-                            <span class="text-xs font-semibold px-2 py-1 rounded bg-white/90 text-gray-700">Video</span>
+                        <!-- Badge -->
+                        <div class="absolute top-3 left-3">
+                            <span v-if="item.type === 'article'" class="text-xs font-semibold px-2 py-1 rounded bg-white/90 text-gray-700">Artikel</span>
+                            <span v-else-if="item.type === 'video'" class="text-xs font-semibold px-2 py-1 rounded bg-white/90 text-gray-700">Video</span>
+                            <span v-else-if="item.type === 'kegiatan'" class="text-xs font-semibold px-2 py-1 rounded bg-white/90 text-gray-700">Kegiatan</span>
                         </div>
                     </div>
 
