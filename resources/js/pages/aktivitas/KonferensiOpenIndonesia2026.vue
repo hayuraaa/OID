@@ -36,9 +36,13 @@ const jadwal = [
         waktu: '13.00–15.00',
         acara: 'Sesi Paralel',
         sub: [
-            'Mengenal Lisensi Bebas dan Domain Publik',
-            'Lisensi data terbuka dalam pemenuhan data spasial di Indonesia — Riyadi Wibowo, OpenStreetMap Indonesia',
-            'Lisensi Creative Commons — Harsa Wahyu Ramadhan, Creative Commons Indonesia',
+            {
+                label: 'Mengenal Lisensi Bebas dan Domain Publik',
+                sub: [
+                    'Lisensi data terbuka dalam pemenuhan data spasial di Indonesia — Riyadi Wibowo, OpenStreetMap Indonesia',
+                    'Lisensi Creative Commons — Harsa Wahyu Ramadhan, Creative Commons Indonesia',
+                ],
+            },
             'Meninjau kebijakan gerakan terbuka di Indonesia — Ari Juliano Gema, Creative Commons Indonesia & Dr. Agung Damarsasongko, S.H., M.H., Direktorat Hak Cipta dan Desain Industri, Kementerian Hukum RI',
             'Rekomendasi Open Science UNESCO: Implementasi dan Evaluasi — Wagiyah, M.Sc., BRIN',
         ],
@@ -118,7 +122,19 @@ const jadwal = [
                                     class="flex items-start gap-2 text-sm text-gray-700"
                                 >
                                     <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-gray-400"></span>
-                                    {{ s }}
+                                    <div>
+                                        {{ typeof s === 'string' ? s : s.label }}
+                                        <ul v-if="typeof s === 'object' && s.sub" class="mt-1 space-y-1 ml-4">
+                                            <li
+                                                v-for="(ss, ssi) in s.sub"
+                                                :key="ssi"
+                                                class="flex items-start gap-2 text-sm text-gray-500"
+                                            >
+                                                <span class="mt-1.5 w-1 h-1 rounded-full flex-shrink-0 bg-gray-300"></span>
+                                                {{ ss }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
