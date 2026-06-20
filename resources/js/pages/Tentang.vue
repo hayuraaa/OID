@@ -80,6 +80,25 @@ import PublicLayout from '@/layouts/PublicLayout.vue';
                 </ul>
             </div>
 
+            <hr class="border-t border-gray-300 my-8" />
+
+            <!-- Bergabung Koalisi -->
+            <div>
+                <h2 class="text-4xl font-bold mb-8" style="color: #1E6C93;">Bergabung Koalisi Open Indonesia</h2>
+                <p class="text-base leading-relaxed">
+                    Organisasi Anda adalah salah satu sektor dari keterbukaan (openness) di Indonesia? Mari bergabung bersama untuk berdampak lebih demi pengetahuan terbuka di Indonesia
+                </p>
+                <a
+                    href="https://forms.gle/2rnjhmctjWXcGLkHA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block mt-6 px-6 py-3 rounded-lg text-white font-semibold hover:opacity-90 transition-opacity"
+                    style="background-color: #1E6C93;"
+                >
+                    Gabung Koalisi Open Indonesia
+                </a>
+            </div>
+
         </section>
 
     </PublicLayout>
