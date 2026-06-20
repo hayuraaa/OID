@@ -114,7 +114,7 @@ function isActive(href: string) {
                             Open Indonesia adalah koalisi dari sejumlah gerakan terbuka di Indonesia.
                         </p>
                         <p class="text-sm text-blue-100 leading-relaxed">
-                            Sekretariat @ Wikimedia Indonesia<br />
+                            open.indonesia@wikimedia.or.id<br />
                             TCC Batavia Tower One, Lt. 6. Jalan K.H. Mas Mansyur No. 126<br />
                             Karet Tengsin, Tanah Abang. Jakarta Pusat 10220<br />
                             Indonesia
