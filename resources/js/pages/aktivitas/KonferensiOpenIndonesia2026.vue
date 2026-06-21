@@ -15,6 +15,7 @@ const jadwal = [
         acara: 'Panel I: Merajut Manfaat Keterbukaan untuk Semua',
         sub: [
             'Akses Terbuka untuk Pendidikan Berkualitas — Dr. Dasapta Erwin Irawan, Institut Teknologi Bandung',
+            'Kolaborasi Pendidik dalam Pengetahuan Terbuka — Prayitno, Ph.D, SEAMEO SEAMOLEC',
             'Kebijakan Sains Terbuka dan Transparansi — Hendro Subagyo, M.Eng, BRIN',
             'Lanskap Open Access Journal di Indonesia — Dr. Zulidyana D. Rusnalasari, M.Hum, Relawan Jurnal Indonesia',
         ],
