@@ -2,13 +2,29 @@
 import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 
-const jadwal = [
+interface SubItem {
+    label: string;
+    sub?: string[];
+    video?: string;
+}
+
+interface JadwalItem {
+    waktu: string;
+    acara: string;
+    detail?: string;
+    moderator?: string;
+    sub?: (string | SubItem)[];
+    video?: string;
+}
+
+const jadwal: JadwalItem[] = [
     { waktu: '09.00–09.15', acara: 'Registrasi' },
     { waktu: '09.15–09.30', acara: 'Pembukaan' },
     {
         waktu: '09.30–10.00',
         acara: 'Keynote Speaker',
-        detail: 'Prof. Dr. Arif Satria, BRIN',
+        detail: 'Prof. Dr. Arif Satria, BRIN ',
+        video: 'https://youtu.be/I_y8b9qpmBY',
     },
     {
         waktu: '10.00–11.00',
@@ -20,6 +36,7 @@ const jadwal = [
             'Lanskap Open Access Journal di Indonesia — Dr. Zulidyana D. Rusnalasari, M.Hum, Relawan Jurnal Indonesia',
         ],
         moderator: 'Ramzy Muliawan, Wikimedia Foundation',
+        video: 'https://youtu.be/xS1DWbDz_CI',
     },
     {
         waktu: '11.00–12.00',
@@ -31,6 +48,7 @@ const jadwal = [
             'Mengadopsi OSS: Tantangan dan Solusi — Lidya Christina, Komunitas Mozilla Indonesia',
         ],
         moderator: 'Hardiansyah, Wikimedia Indonesia',
+        video: 'https://youtu.be/1bdv9AwAVsU',
     },
     { waktu: '12.00–13.00', acara: 'Istirahat, Makan Siang, dan Berjejaring' },
     {
@@ -43,9 +61,16 @@ const jadwal = [
                     'Lisensi data terbuka dalam pemenuhan data spasial di Indonesia — Riyadi Wibowo, OpenStreetMap Indonesia',
                     'Lisensi Creative Commons — Harsa Wahyu Ramadhan, Creative Commons Indonesia',
                 ],
+                video: 'https://youtu.be/dpI5CyiTQ4s',
             },
-            'Meninjau kebijakan gerakan terbuka di Indonesia — Ari Juliano Gema, Creative Commons Indonesia & Dr. Agung Damarsasongko, S.H., M.H., Direktorat Hak Cipta dan Desain Industri, Kementerian Hukum RI',
-            'Rekomendasi Open Science UNESCO: Implementasi dan Evaluasi — Wagiyah, M.Sc., BRIN',
+            {
+                label: 'Meninjau kebijakan gerakan terbuka di Indonesia — Ari Juliano Gema, Creative Commons Indonesia & Dr. Agung Damarsasongko, S.H., M.H., Direktorat Hak Cipta dan Desain Industri, Kementerian Hukum RI',
+                video: 'https://youtu.be/WtGsVVgzM7g',
+            },
+            {
+                label: 'Rekomendasi Open Science UNESCO: Implementasi dan Evaluasi — Wagiyah, M.Sc., BRIN',
+                video: 'https://youtu.be/TDjLmrT1Rc4',
+            },
         ],
     },
 ];
@@ -111,7 +136,7 @@ const jadwal = [
                         class="flex items-start gap-3"
                     >
                         <span class="mt-1.5 w-2 h-2 rounded-full flex-shrink-0" style="background-color: #1E6C93;"></span>
-                        <div class="text-base leading-relaxed">
+                        <div class="text-base leading-relaxed w-full">
                             <span class="font-semibold">{{ item.waktu }}</span>
                             &nbsp;—&nbsp;{{ item.acara }}
                             <span v-if="item.moderator" class="text-gray-500 text-sm"> (Moderator: {{ item.moderator }})</span>
@@ -123,7 +148,7 @@ const jadwal = [
                                     class="flex items-start gap-2 text-sm text-gray-700"
                                 >
                                     <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-gray-400"></span>
-                                    <div>
+                                    <div class="w-full">
                                         {{ typeof s === 'string' ? s : s.label }}
                                         <ul v-if="typeof s === 'object' && s.sub" class="mt-1 space-y-1 ml-4">
                                             <li
@@ -135,13 +160,43 @@ const jadwal = [
                                                 {{ ss }}
                                             </li>
                                         </ul>
+                                        <a
+                                            v-if="typeof s === 'object' && s.video"
+                                            :href="s.video"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="inline-block mt-1 text-sm underline"
+                                            style="color: #1E6C93;"
+                                        >Tonton video rekaman</a>
                                     </div>
                                 </li>
                             </ul>
+                            <a
+                                v-if="item.video"
+                                :href="item.video"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-block mt-1 text-sm underline"
+                                style="color: #1E6C93;"
+                            >Tonton video rekaman</a>
                         </div>
                     </li>
                 </ul>
             </div>
+
+            <hr class="border-t border-gray-300 my-4" />
+
+            <!-- Pranala salindia -->
+            <p class="text-base">
+                Pranala salindia pembicara:
+                <a
+                    href="https://bit.ly/salindia-oid-2026"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="underline"
+                    style="color: #1E6C93;"
+                >bit.ly/salindia-oid-2026</a>
+            </p>
 
         </section>
 
