@@ -2,6 +2,12 @@
 import { Head } from '@inertiajs/vue3';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 
+function getYoutubeEmbedUrl(url: string): string {
+    const match = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+    if (match) return `https://www.youtube.com/embed/${match[1]}`;
+    return url;
+}
+
 interface SubItem {
     label: string;
     sub?: string[];
@@ -160,25 +166,29 @@ const jadwal: JadwalItem[] = [
                                                 {{ ss }}
                                             </li>
                                         </ul>
-                                        <a
-                                            v-if="typeof s === 'object' && s.video"
-                                            :href="s.video"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="inline-block mt-1 text-sm underline"
-                                            style="color: #1E6C93;"
-                                        >Tonton video rekaman</a>
+                                        <p v-if="typeof s === 'object' && s.video" class="mt-2 text-sm text-gray-500">Video :</p>
+                                        <div v-if="typeof s === 'object' && s.video" class="mt-1 w-full max-w-sm aspect-video rounded-lg overflow-hidden">
+                                            <iframe
+                                                :src="getYoutubeEmbedUrl(s.video)"
+                                                class="w-full h-full"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen
+                                            ></iframe>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
-                            <a
-                                v-if="item.video"
-                                :href="item.video"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-block mt-1 text-sm underline"
-                                style="color: #1E6C93;"
-                            >Tonton video rekaman</a>
+                            <p v-if="item.video" class="mt-2 text-sm text-gray-500">Video :</p>
+                            <div v-if="item.video" class="mt-1 w-full max-w-sm aspect-video rounded-lg overflow-hidden">
+                                <iframe
+                                    :src="getYoutubeEmbedUrl(item.video)"
+                                    class="w-full h-full"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                ></iframe>
+                            </div>
                         </div>
                     </li>
                 </ul>
