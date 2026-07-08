@@ -147,7 +147,7 @@ const jadwal: JadwalItem[] = [
                             &nbsp;—&nbsp;{{ item.acara }}
                             <span v-if="item.moderator" class="text-gray-500 text-sm"> (Moderator: {{ item.moderator }})</span>
                             <span v-if="item.detail" class="text-gray-600"> — {{ item.detail }}</span>
-                            <ul v-if="item.sub" class="mt-2 space-y-1 ml-4">
+                            <ul v-if="item.sub" class="mt-2 space-y-5 ml-4">
                                 <li
                                     v-for="(s, si) in item.sub"
                                     :key="si"
@@ -166,8 +166,8 @@ const jadwal: JadwalItem[] = [
                                                 {{ ss }}
                                             </li>
                                         </ul>
-                                        <p v-if="typeof s === 'object' && s.video" class="mt-2 text-sm text-gray-500">Video :</p>
-                                        <div v-if="typeof s === 'object' && s.video" class="mt-1 w-full max-w-sm aspect-video rounded-lg overflow-hidden">
+                                        <p v-if="typeof s === 'object' && s.video" class="mt-3 text-sm text-gray-500">Video :</p>
+                                        <div v-if="typeof s === 'object' && s.video" class="mt-2 w-full max-w-sm aspect-video rounded-lg overflow-hidden">
                                             <iframe
                                                 :src="getYoutubeEmbedUrl(s.video)"
                                                 class="w-full h-full"
